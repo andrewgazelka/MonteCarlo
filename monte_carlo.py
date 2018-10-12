@@ -3,7 +3,7 @@
 import random
 
 
-def calc_pi(iterations: int = 10000, circle_diameter: float = 1):
+def calc_pi(iterations: int = 10000, circle_diameter: float = 1) -> int:
     """
 
     We will solve pi by first drawing a circle in the center of a square with side length d. Both are centered at the
@@ -52,6 +52,42 @@ def calc_pi(iterations: int = 10000, circle_diameter: float = 1):
     return 4 / area_ratio
 
 
+def integral_1(func, x_from, x_to, y_min, y_max, iterations=100_000):
+    total_area = abs(x_to - x_from) * abs(y_max - y_min)  # Just the area of a square
+
+    hits = 0
+    misses = 0
+
+    for i in range(iterations):
+        rand_x = random.uniform(x_from, x_to)
+        rand_y = random.uniform(y_min, y_max)
+
+        if func(rand_x, rand_y):
+            hits += 1
+        else:
+            misses += 1
+
+    return total_area * (hits / (hits + misses))
+
+
+def integral_2(func, x_from, x_to, iterations=100_000):
+    """
+
+    :param func: returns y
+    :param x_from:
+    :param x_to:
+    :param iterations:
+    :return:
+    """
+
+    dx = 1 / iterations * (x_to - x_from)
+    area = 0
+    for i in range(iterations):
+        rand_x = random.uniform(x_from, x_to)
+        area += func(rand_x) * dx
+    return area
+
+
 def mag2(x, y):
     return x * x + y * y
 
@@ -61,7 +97,3 @@ def normal_dist(nums):
     for i in range(nums):
         result += i / nums
     return result
-
-
-if __name__ == "__main__":
-    print(calc_pi(iterations=1_000_000, circle_diameter=2))
