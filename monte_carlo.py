@@ -20,8 +20,10 @@ def calc_pi(iterations: int = 10000, circle_diameter: float = 1):
     | the area scaling factor is det(A) = k^2 for both of them. Thus, the area of the circle is proportional to d^2
     (the area of the square). We will be trying to figure out the c such that {the area of the circle} * c is d^2
 
-    | Note, however, that this is the ratio between the area of circle and d^2. However, r^2 = (d/2)^2 = d^2/4, so we
-    will need to multiply the end result by 4 since pi is the ratio of r^2 to area
+    | This is the ratio between the area of circle and d^2. However,
+    c * {the area of the circle} = d^2 = (2r)^2 = 4r^2.
+
+    Thus, (4/c)r^2 = {the area of the circle}
 
     :return: pi
     """
@@ -45,8 +47,8 @@ def calc_pi(iterations: int = 10000, circle_diameter: float = 1):
             miss += 1
 
     area_circle = hit / (hit + miss) * area_square
-    area_ratio = area_circle / area_square
-    return 4 * area_ratio
+    area_ratio = area_square / area_circle
+    return 4 / area_ratio
 
 
 def normal_dist(nums):
