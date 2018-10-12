@@ -64,5 +64,4 @@ def normal_dist(nums):
 
 
 if __name__ == "__main__":
-    while True:
-        print(calc_pi(circle_diameter=2))
+    print(calc_pi(iterations=1_000_000, circle_diameter=2))
