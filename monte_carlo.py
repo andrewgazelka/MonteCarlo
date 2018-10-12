@@ -41,14 +41,19 @@ def calc_pi(iterations: int = 10000, circle_diameter: float = 1):
         rand_x = random.uniform(-r, r)
         rand_y = random.uniform(-r, r)
 
-        if rand_x * rand_x + rand_y + rand_y < r_squared:
+        dist2 = mag2(rand_x, rand_y)
+        if dist2 < r_squared:
             hit += 1
         else:
             miss += 1
 
     area_circle = hit / (hit + miss) * area_square
-    area_ratio = area_square / area_circle
+    area_ratio = area_square / area_circle  # = c
     return 4 / area_ratio
+
+
+def mag2(x, y):
+    return x * x + y * y
 
 
 def normal_dist(nums):
@@ -59,4 +64,5 @@ def normal_dist(nums):
 
 
 if __name__ == "__main__":
-    print(calc_pi())
+    while True:
+        print(calc_pi(circle_diameter=2))
